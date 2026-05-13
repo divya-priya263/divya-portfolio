@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <meta name="description" content="Divya Priya K – Data Analyst Portfolio. Expert in Python, SQL, Power BI, Machine Learning, and Data Visualization. Based in Bengaluru, India."/>
@@ -747,7 +746,7 @@ section{padding:4rem 1.2rem}
         </div>
         <div class="form-group"><label>Subject</label><input type="text" class="form-input" placeholder="Job Opportunity at Company" id="formSubject"/></div>
         <div class="form-group"><label>Message</label><textarea class="form-textarea" rows="5" placeholder="Hi Divya, I'd like to discuss a Data Analyst opportunity..." id="formMsg"></textarea></div>
-        <button class="form-submit" onclick="handleSubmit(event)">Send Message →</button>
+        <button class="form-submit" onclick="handleSubmit()">Send Message →</button>
       </div>
       <div class="form-success" id="formSuccess">
         <div class="check">✅</div>
@@ -931,39 +930,13 @@ if(canvas){
 }
 
 // FORM SUBMIT
-<script>
-function handleSubmit(event){
-  event.preventDefault();
-
-  const name = document.getElementById('formName').value;
-  const email = document.getElementById('formEmail').value;
-  const subject = document.getElementById('formSubject').value;
-  const message = document.getElementById('formMsg').value;
-
-  if(!name || !email || !message){
-    alert("Please fill all required fields");
-    return;
-  }
-
-  emailjs.send(
-    "service_932aqx9",
-    "template_qcrkkpd",
-    {
-      from_name: name,
-      from_email: email,
-      subject: subject,
-      message: message
-    },
-    "xGYpnygipehTqhFkq"
-  ).then(() => {
-    document.getElementById('contactForm').style.display='none';
-    document.getElementById('formSuccess').style.display='block';
-  }).catch((error) => {
-    console.log(error);
-    alert("Failed to send message. Try again.");
-  });
+function handleSubmit(){
+  const name=document.getElementById('formName').value;
+  const email=document.getElementById('formEmail').value;
+  if(!name||!email){alert('Please fill in your name and email.');return;}
+  document.getElementById('contactForm').style.display='none';
+  document.getElementById('formSuccess').style.display='block';
 }
-</script>
 
 // RESUME DOWNLOAD
 function downloadResume(){
