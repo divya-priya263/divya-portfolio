@@ -931,13 +931,39 @@ if(canvas){
 }
 
 // FORM SUBMIT
-function handleSubmit(){
-  const name=document.getElementById('formName').value;
-  const email=document.getElementById('formEmail').value;
-  if(!name||!email){alert('Please fill in your name and email.');return;}
-  document.getElementById('contactForm').style.display='none';
-  document.getElementById('formSuccess').style.display='block';
+<script>
+function handleSubmit(event){
+  event.preventDefault();
+
+  const name = document.getElementById('formName').value;
+  const email = document.getElementById('formEmail').value;
+  const subject = document.getElementById('formSubject').value;
+  const message = document.getElementById('formMsg').value;
+
+  if(!name || !email || !message){
+    alert("Please fill all required fields");
+    return;
+  }
+
+  emailjs.send(
+    "service_932aqx9",
+    "template_qcrkkpd",
+    {
+      from_name: name,
+      from_email: email,
+      subject: subject,
+      message: message
+    },
+    "xGYpnygipehTqhFkq"
+  ).then(() => {
+    document.getElementById('contactForm').style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+  }).catch((error) => {
+    console.log(error);
+    alert("Failed to send message. Try again.");
+  });
 }
+</script>
 
 // RESUME DOWNLOAD
 function downloadResume(){
